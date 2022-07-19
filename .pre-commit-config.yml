@@ -1,0 +1,118 @@
+repos:
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: v4.1.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^frontend/build
+      - id: end-of-file-fixer
+        exclude: ^frontend/build
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: check-ast
+      - id: debug-statements
+      - id: check-docstring-first
+  - repo: "https://github.com/asottile/yesqa"
+    rev: v1.3.0
+    hooks:
+      - id: yesqa
+        additional_dependencies: &ref_0
+          - flake8-annotations==2.7.0
+          - flake8-broken-line==0.4.0
+          - flake8-bugbear==21.9.2
+          - flake8-comprehensions==3.7.0
+          - flake8-docstrings==1.6.0
+          - flake8-eradicate==1.2.0
+          - flake8-no-pep420==1.2.0
+          - flake8-quotes==3.3.1
+          - flake8-simplify==0.14.2
+          - flake8-tidy-imports==4.5.0
+          - flake8-type-checking==1.1.0
+          - flake8-typing-imports==1.11.0
+          - flake8-use-fstring==1.3
+          - pep8-naming==0.12.1
+  - repo: "https://github.com/pre-commit/pygrep-hooks"
+    rev: v1.9.0
+    hooks:
+      - id: python-check-mock-methods
+      - id: python-use-type-annotations
+      - id: python-check-blanket-type-ignore
+      - id: python-check-blanket-noqa
+  - repo: https://github.com/myint/docformatter
+    rev: v1.3.1
+    hooks:
+      - id: docformatter
+        args:
+          - --in-place
+          - --wrap-summaries=100
+          - --wrap-descriptions=100
+  - repo: "https://github.com/pycqa/isort"
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+  - repo: "https://github.com/psf/black"
+    rev: 22.1.0
+    hooks:
+      - id: black
+        language_version: python3.10
+  - repo: "https://github.com/pycqa/flake8"
+    rev: 4.0.1
+    hooks:
+      - id: flake8
+        additional_dependencies: *ref_0
+  - repo: "https://github.com/pre-commit/mirrors-mypy"
+    rev: v0.931
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - apscheduler
+          - cryptography
+          - django-stubs
+          - types-requests
+          - ddtrace
+          - django_extensions
+          - dj-database-url
+          - djangorestframework
+          - djangorestframework-stubs
+          - django-admin-interface
+          - django-qr-code
+          - django-cors-headers
+          - django-hashid-field
+          - python-dotenv
+          - sentry-sdk
+          - boto3
+          - stripe
+          - web3
+  - repo: "https://github.com/pre-commit/pre-commit"
+    rev: v2.17.0
+    hooks:
+      - id: validate_manifest
+  - repo: local
+    hooks:
+      - id: update-requirements-txt
+        name: update-requirements-txt
+        description: Generate requirements.txt based on poetry.lock
+        entry: poetry
+        args:
+          - export
+          - "--format"
+          - requirements.txt
+          - "--output"
+          - requirements.txt
+          - "--without-hashes"
+        language: system
+        pass_filenames: false
+      - id: prettier
+        name: prettier
+        entry: ./frontend/node_modules/.bin/prettier --write --list-different --ignore-unknown
+        language: node
+        types:
+          - text
+        args: []
+        require_serial: false
+        additional_dependencies: []
+        minimum_pre_commit_version: "0"
+        exclude: ^frontend/build
