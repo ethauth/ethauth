@@ -105,14 +105,3 @@ repos:
           - "--without-hashes"
         language: system
         pass_filenames: false
-      - id: prettier
-        name: prettier
-        entry: ./frontend/node_modules/.bin/prettier --write --list-different --ignore-unknown
-        language: node
-        types:
-          - text
-        args: []
-        require_serial: false
-        additional_dependencies: []
-        minimum_pre_commit_version: "0"
-        exclude: ^frontend/build
