@@ -7,6 +7,7 @@ authors = ["Shantanu Bala <shantanubala@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 web3 = "^5.30.0"
+cryptography = "^37.0.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
