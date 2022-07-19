@@ -1,2 +1,0 @@
-# ethauth
-Ethauth repository
