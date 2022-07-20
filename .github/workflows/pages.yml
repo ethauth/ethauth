@@ -17,6 +17,8 @@ jobs:
           virtualenvs-create: false
           virtualenvs-in-project: false
           installer-parallel: true
+      - run: |
+          poetry install
       - name: Build and Commit
         uses: sphinx-notes/pages@v2
       - name: Push changes
